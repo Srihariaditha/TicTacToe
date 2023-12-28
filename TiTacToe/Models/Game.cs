@@ -1,5 +1,6 @@
 ﻿using System;
 using TiTacToe.Models;
+using TiTacToe.Strategies.WinningStrategies;
 
 namespace TiTacToe.Models
 {
@@ -45,18 +46,25 @@ namespace TiTacToe.Models
 
         public void makeMove()
         {
+            this.board.display();
             this.lastMovedPlayerIndex += 1;
             this.lastMovedPlayerIndex %= this.Players.Count;
 
-            Move move = this.Players[this.lastMovedPlayerIndex].makeMove(this.board);
+            Move pmove = this.Players[this.lastMovedPlayerIndex].makeMove(this.board);
 
-            this.Moves.Add(move);
+            if (this.board.getCell(pmove.row,pmove.col).player == null)
+            {
+                Console.WriteLine("bad move");
+                return;
+            }
+            this.moves.Add(pmove);
+            this.board.getCell(pmove.row, pmove.col).player = this.Players[this.lastMovedPlayerIndex];
 
-            move.getCell().setSymbol(move.getSymbol());
+            //var filledCells = 1;
 
             foreach (GameWinningStrategy strategy in this.GameWinningStrategies)
             {
-                if (strategy.checkIfWon(this.board, this.Players[lastMovedPlayerIndex], move.getCell()))
+                if (strategy.checkVictory(this.board, pmove))
                 {
                     gameStatus = GameStatus.ENDED;
                     winner = this.Players[lastMovedPlayerIndex];

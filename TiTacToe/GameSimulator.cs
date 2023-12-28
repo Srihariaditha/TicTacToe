@@ -36,7 +36,7 @@ namespace TiTacToe
 
             Console.WriteLine("How Many WSC?");
             int wsc = Convert.ToInt32(Console.ReadLine());
-            var gameWinningStrategies = new List<GameWinningStrategy>();
+            var gameWinningStrategies = new List<GameWinningStrategyName>();
             for (int i = 0; i < wsc; i++)
             {
                 Console.WriteLine($"Strategy {i}");
@@ -48,6 +48,10 @@ namespace TiTacToe
             Game game = gameBuilder.setPlayers(players)
                 .setGameWinningStrategies(gameWinningStrategies) 
                 .Build();
+            while (game.gameStatus == GameStatus.IN_PROGRESS)
+            {
+                game.makeMove();
+            }
         }
     }
 }

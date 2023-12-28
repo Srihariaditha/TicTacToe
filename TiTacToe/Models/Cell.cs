@@ -2,15 +2,15 @@
 {
     public class Cell
     {
-        private int row { get; }
-        private int column { get; }
+        public int row { get; }
+        public int col { get; }
         public Player? player { get; set; }
-        private Symbol? symbol { get; set; }
+        public Symbol? symbol { get; set; }
 
         public Cell(int row, int column)
         {
             this.row = row;
-            this.column = column;
+            this.col = column;
         }
 
         public Boolean IsEmpty()

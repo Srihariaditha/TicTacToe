@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TiTacToe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ff48129783bf728d87ea3b29669b049e3ce8dcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("TiTacToe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TiTacToe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

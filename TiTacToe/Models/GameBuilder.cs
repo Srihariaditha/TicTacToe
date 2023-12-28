@@ -3,27 +3,29 @@
 // ii. Need validation (every player must have a different symbol
 using TiTacToe.Exceptions;
 using TiTacToe.Factories;
+using TiTacToe.Strategies.WinningStrategies;
 namespace TiTacToe.Models
 {
     public class GameBuilder
     {
 
-        private List<Player> Players;
-        private List<GameWinningStrategy> GameWinningStrategies;
-        private GameStatus GameStatus;
+        public List<Player> players;
+        public List<GameWinningStrategy> gameWinningStrategies;
+        //private GameStatus GameStatus;
 
         public GameBuilder setPlayers(List<Player> players)
         {
-            this.Players = players;
+            this.players = players;
             return this;
         }
 
-        public GameBuilder setGameWinningStrategies(List<GameWinningStrategy> GameWinningStrategies)
+        public GameBuilder setGameWinningStrategies(List<GameWinningStrategyName> gameWinningStrategyNames)
         {
-            this.GameWinningStrategies = GameWinningStrategies;
-            foreach (GameWinningStrategy gameWinningStrategyName in  this.GameWinningStrategies)
+            this.gameWinningStrategies = new List<GameWinningStrategy>();
+
+            foreach(GameWinningStrategyName gwsName in gameWinningStrategyNames)
             {
-                this.GameWinningStrategies.Add(GameWinningStrategyFactory.GetGameWinningStrategyByName(gameWinningStrategyName));
+                this.gameWinningStrategies.Add(GameWinningStrategyFactory.GetGameWinningStrategyByName(gwsName));
             }
             return this;
         }
@@ -31,7 +33,7 @@ namespace TiTacToe.Models
         public Game Build() 
         {
             var alreadyExistingCharacters = new HashSet<char>();
-            foreach (var player in this.Players)
+            foreach (var player in this.players)
             {
                 var s = Convert.ToChar(player?.symbol);
                 if (alreadyExistingCharacters.Contains(s))
@@ -45,9 +47,9 @@ namespace TiTacToe.Models
             game.gameStatus = GameStatus.IN_PROGRESS;
             game.GameWinningStrategies = new List<GameWinningStrategy>();
             game.Moves = new List<Move>();
-            game.Players = this.Players);
-            game.GameWinningStrategies.AddRange(this.GameWinningStrategies);
-            game.Board = new Board(dimension: Players.Count+1);
+            game.Players = this.players;
+            //game.GameWinningStrategies.AddRange(this.gameWinningStrategies);
+            game.Board = new Board(dimension: this.players.Count+1);
             game.lastMovedPlayerIndex = -1;
 
             return game;

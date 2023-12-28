@@ -21,9 +21,33 @@ namespace TiTacToe.Models
                 board.Add(new List<Cell>());
                 for (int j = 0; j < dimension; j++)
                 {
-                    board[i].Add(new Cell());
+                    board[i].Add(new Cell(i, j));
                 }
             }
+        }
+
+        public void display()
+        {
+            foreach (List<Cell> rows in board)
+            {
+                foreach (Cell cell in rows)
+                {
+                    if (cell.player == null)
+                    {
+                        Console.Write(" - ");
+                    }
+                    else
+                    {
+                        Console.Write(" " + Convert.ToString(cell.player.symbol) + " ");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public Cell getCell(int row, int col)
+        {
+            return this.board[row][col];
         }
     }
 }

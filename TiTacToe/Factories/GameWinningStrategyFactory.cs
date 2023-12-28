@@ -1,28 +1,29 @@
 ﻿using System.Data.Common;
 using System.Diagnostics.Metrics;
 using TiTacToe.Models;
+using TiTacToe.Strategies.WinningStrategies;
 namespace TiTacToe.Factories
 {
     public class GameWinningStrategyFactory
     {
-        public static GameWinningStrategy  GetGameWinningStrategyByName(GameWinningStrategy GameWinningStrategy)
+        public static GameWinningStrategy  GetGameWinningStrategyByName(GameWinningStrategyName GameWinningStrategy)
         {
             switch (GameWinningStrategy)
             {
-                case GameWinningStrategy.COLUMN:
-                    return GameWinningStrategy.COLUMN;
-                    
+                case GameWinningStrategyName.COLUMN:
+                    return new NotGonnaWinGameWinningStrategy();
+
                 //case GameWinningStrategy.ROW: null;
                 //case GameWinningStrategy.DIAGONAL: null;
                 //case GameWinningStrategy.CORNER: null;
             };
-            return GameWinningStrategy.ROW;
+            return new NotGonnaWinGameWinningStrategy();
         }
 
-        public GameWinningStrategy CreateBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel difficultyLevel)
+        public GameWinningStrategyName CreateBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel difficultyLevel)
         {
 
-            GameWinningStrategy strategy = GameWinningStrategy.CORNER;
+            GameWinningStrategyName strategy = GameWinningStrategyName.CORNER;
 
             switch (difficultyLevel)
             {
@@ -30,12 +31,12 @@ namespace TiTacToe.Factories
                 case BotDifficultyLevel.MEDIUM:
                 case BotDifficultyLevel.HARD:
                     {
-                        strategy = GameWinningStrategy.ROW;
+                        strategy = GameWinningStrategyName.ROW;
                         break;
                     }
 
                 default:
-                    strategy = GameWinningStrategy.COLUMN;
+                    strategy = GameWinningStrategyName.COLUMN;
                     break;
             };
             return strategy;

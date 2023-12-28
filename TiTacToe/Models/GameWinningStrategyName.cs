@@ -1,6 +1,6 @@
 ﻿namespace TiTacToe.Models
 {
-    public enum GameWinningStrategy
+    public enum GameWinningStrategyName
     {
         ROW,
         COLUMN,

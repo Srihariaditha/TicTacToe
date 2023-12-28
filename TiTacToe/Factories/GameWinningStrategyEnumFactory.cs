@@ -5,13 +5,13 @@ namespace TiTacToe.Factories
 {
     public class GameWinningStrategyEnumFactory
     {
-        public static GameWinningStrategy CreateNewGWSByName(string gwsName)
+        public static GameWinningStrategyName CreateNewGWSByName(string gwsName)
         {
             if (gwsName.Equals("ROW"))
             {
-                return GameWinningStrategy.ROW;
+                return GameWinningStrategyName.ROW;
             }
-            return GameWinningStrategy.ROW;
+            return GameWinningStrategyName.ROW;
         }
     }
 }

@@ -2,12 +2,16 @@
 {
     public class Move
     {
-        public Cell? cell { get; set; }
+        public int row { get; set; }
+        public int col { get; set; }
 
-        public Move(Cell cell, Player player)
+        public Player player { get; set; }
+
+        public Move(int row, int col, Player player)
         {
-            this.cell = cell;
-            this.cell.player = player;
+            this.row = row;
+            this.col = col;
+            this.player = player;
         }
 
     }
